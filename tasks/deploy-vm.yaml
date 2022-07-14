@@ -10,7 +10,7 @@
     cluster: "{{  vcenter_cluster }}"
     name: "{{ vcenter_cluster }}-{{ vmware_hostname }}"
     folder: "{{ vmware_folder }}"
-    guest_id: coreos64Guest
+    guest_id: rhel8_64Guest	
     state: present
     disk: "{{ vmware_disk_size }}"
     hardware:
@@ -38,6 +38,7 @@
     name: "{{ vcenter_cluster }}-{{ vmware_hostname }}"
     folder: "{{ vmware_folder }}"
     state: powered-on
+    guest_id: rhel8_64Guest	
   tags:
     - vmware_deploy_vms
 
