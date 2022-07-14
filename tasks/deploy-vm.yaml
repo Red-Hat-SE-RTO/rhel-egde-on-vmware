@@ -23,7 +23,7 @@
       nested_virt: "{{ vsphere_nested_virt | default(False) }}"
     cdrom: "{{ iso_path_loc }}"
     networks: "{{ networks }}"
-    tags:
+  tags:
     - vmware_deploy_vms
 
 - name: Power On VM - {{ vmware_hostname }}
