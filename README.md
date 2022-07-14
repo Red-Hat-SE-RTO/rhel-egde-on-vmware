@@ -6,8 +6,14 @@ This project is an Ansible role to deploy to a rhel-edge instance to VCenter.
 
 Requirements
 ------------
-
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+* install ansible collections
+```
+ansible-galaxy collection install -r collections/requirements.yml
+```
+* isntall pyvmomi
+```
+pip install pyvmomi
+```
 
 Role Variables
 --------------
