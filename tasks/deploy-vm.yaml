@@ -1,5 +1,5 @@
 ---
-- name: Create VM - {{ node_item.name }}
+- name: Create VM - {{ vmware_hostname }}
   community.vmware.vmware_guest:
     hostname: '{{  vcenter_hostname }}'
     username: '{{  vcenter_username }}'
@@ -26,7 +26,7 @@
     tags:
     - vmware_deploy_vms
 
-- name: Power On VM - {{ node_item.name }}
+- name: Power On VM - {{ vmware_hostname }}
   community.vmware.vmware_guest:
     hostname: '{{ vcenter_hostname }}'
     username: '{{ vcenter_username }}'
