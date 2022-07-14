@@ -1,2 +1,15 @@
 ---
 # tasks file for rhel-egde-on-vmware
+- include_tasks: upload-iso.yaml
+  tags:
+    - vmware_create_folder
+    - vmware_check_for_iso
+    - vmware_upload_iso
+- include_tasks: deploy-vm.yaml
+  tags:
+    - vmware_deploy_vms
+- include_tasks: destroy-vm.yaml
+  tags:
+    - vmware_destroy_vm
+    - vmware_delete_iso
+    - vmware_delete_folder

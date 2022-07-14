@@ -1,0 +1,43 @@
+---
+- name: Create VM - {{ node_item.name }}
+  community.vmware.vmware_guest:
+    hostname: '{{  vcenter_hostname }}'
+    username: '{{  vcenter_username }}'
+    password: '{{  vcenter_password }}'
+    validate_certs: '{{  vcenter_verify_ssl }}'
+    datacenter: "{{  vcenter_datacenter }}"
+    datastore: "{{  vcenter_datastore }}"
+    cluster: "{{  vcenter_cluster }}"
+    name: "{{ cluster_name }}-{{ vmware_hostname }}"
+    folder: "{{ vmware_folder }}"
+    guest_id: coreos64Guest
+    state: present
+    disk: "{{ vmware_disk_size }}"
+    hardware:
+      memory_mb: "{{ vmware_ram_mb }}"
+      num_cpu_cores_per_socket : "{{ vm_num_cpu_cores_per_socket }}"
+      num_cpus : "{{ vm_num_cpus }}"
+      hotadd_cpu: yes
+      hotadd_memory: yes
+      version: "{{ vcenter_hardware_version | int }}"
+      nested_virt: "{{ vsphere_nested_virt | default(False) }}"
+    cdrom: "{{ iso_path_loc }}"
+    networks: "{{ networks }}"
+    tags:
+    - vmware_deploy_vms
+
+- name: Power On VM - {{ node_item.name }}
+  community.vmware.vmware_guest:
+    hostname: '{{ vcenter_hostname }}'
+    username: '{{ vcenter_username }}'
+    password: '{{ vcenter_password }}'
+    validate_certs: '{{ vcenter_verify_ssl }}'
+    datacenter: "{{  vcenter_datacenter }}"
+    datastore: "{{  vcenter_datastore }}"
+    cluster: "{{  vcenter_cluster }}"
+    name: "{{ cluster_name }}-{{ vmware_hostname }}"
+    folder: "{{ vmware_folder }}"
+    state: powered-on
+  tags:
+    - vmware_deploy_vms
+

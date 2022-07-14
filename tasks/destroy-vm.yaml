@@ -1,0 +1,56 @@
+---
+
+#===========================================================================
+# Delete ISO
+#===========================================================================
+
+- name: Check for the ISO
+  community.vmware.vsphere_file:
+    host: '{{ vcenter_hostname }}'
+    username: '{{ vcenter_username }}'
+    password: '{{ vcenter_password }}'
+    validate_certs: '{{ vcenter_verify_ssl }}'
+    datacenter: "{{ vmware_datacenter }}"
+    datastore: "{{ {{ vmware_datastore }} }}"
+    path: "{{ iso_path_loc }}"
+    state: file
+  ignore_errors: true
+  register: vmware_check_for_iso
+  tags:
+    - vmware_destroy_vm
+    - vmware_check_for_iso
+
+- name: Delete the iso if present
+  when: vmware_check_for_iso.state != "absent"
+  community.vmware.vsphere_file:
+    host: '{{ vcenter_hostname }}'
+    username: '{{ vcenter_username }}'
+    password: '{{ vcenter_password }}'
+    validate_certs: '{{ vcenter_verify_ssl }}'
+    datacenter: "{{ vmware_datacenter }}"
+    datastore: "{{ {{ vmware_datastore }} }}"
+    path: "{{ iso_path_loc }}"
+    state: absent
+  ignore_errors: true
+  tags:
+    - vmware_destroy_vm
+    - vmware_delete_iso
+
+#===========================================================================
+# vCenter Organizational Structure
+#===========================================================================
+
+- name: Delete Cluster Folder
+  community.vmware.vcenter_folder:
+    hostname: '{{ vcenter_hostname }}'
+    username: '{{ vcenter_username }}'
+    password: '{{ vcenter_password }}'
+    validate_certs: '{{ vcenter_verify_ssl }}'
+    datacenter_name: "{{ vmware_datacenter }}"
+    folder_name: "{{ cluster_name }}"
+    folder_type: vm
+    state: absent
+  ignore_errors: true
+  tags:
+    - vmware_destroy_vm
+    - vmware_delete_folder

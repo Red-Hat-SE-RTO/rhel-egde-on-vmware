@@ -1,0 +1,66 @@
+---
+
+#===========================================================================
+# vCenter Organizational Structure
+#===========================================================================
+
+- name: Create Cluster Folder
+  community.vmware.vcenter_folder:
+    hostname: '{{  vcenter_hostname }}'
+    username: '{{  vcenter_username }}'
+    password: '{{  vcenter_password }}'
+    validate_certs: '{{  vcenter_verify_ssl }}'
+    datacenter_name: "{{  vcenter_datacenter }}"
+    folder_name: "{{ vmware_folder }}"
+    folder_type: vm
+    state: present
+  tags:
+    - vmware_create_folder
+
+- name: Create the ISOs directory on the datacenter/datastore
+  community.vmware.vsphere_file:
+    host: '{{  vcenter_hostname }}'
+    username: '{{  vcenter_username }}'
+    password: '{{  vcenter_password }}'
+    validate_certs: '{{  vcenter_verify_ssl }}'
+    datacenter: "{{  vcenter_datacenter }}"
+    datastore: "{{  vcenter_datastore }}"
+    path: /ISOs
+    state: directory
+  tags:
+    - vmware_create_folder
+
+#===========================================================================
+# Upload ISO
+#===========================================================================
+
+- name: Check for the ISO
+  community.vmware.vsphere_file:
+    host: '{{  vcenter_hostname }}'
+    username: '{{  vcenter_username }}'
+    password: '{{  vcenter_password }}'
+    validate_certs: '{{  vcenter_verify_ssl }}'
+    datacenter: "{{  vcenter_datacenter }}"
+    datastore: "{{  vcenter_datastore }}"
+    path: "{{ iso_path_loc }}"
+    state: file
+  ignore_errors: true
+  register: vmware_check_for_iso
+  tags:
+    - vmware_check_for_iso
+
+- name: Upload Discovery ISO to the target Cluster Store
+  when: vmware_check_for_iso.state == "absent"
+  community.vmware.vsphere_copy:
+    hostname: '{{  vcenter_hostname }}'
+    username: '{{  vcenter_username }}'
+    password: '{{  vcenter_password }}'
+    validate_certs: '{{  vcenter_verify_ssl }}'
+    datacenter: "{{  vcenter_datacenter }}"
+    datastore: "{{  vcenter_datastore }}"
+    src: "{{ iso_src }}"
+    path: "{{ iso_path_loc }}"
+  ignore_errors: true
+  tags:
+  - vmware_upload_iso
+  - vmware_check_for_iso

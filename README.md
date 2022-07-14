@@ -1,7 +1,8 @@
-Role Name
+RHEL Edge VMWare Ansible role
 =========
 
-A brief description of the role goes here.
+This project is an Ansible role to deploy to a rhel-edge instance to VCenter.
+
 
 Requirements
 ------------

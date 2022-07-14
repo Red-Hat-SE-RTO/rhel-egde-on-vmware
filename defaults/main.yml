@@ -1,2 +1,21 @@
 ---
 # defaults file for rhel-egde-on-vmware
+vcenter_hostname: "vsphere@example.com"
+vcenter_username: "administrator@vsphere.local"
+vcenter_password: "P@$$w0rD"
+vcenter_verify_ssl: false 
+vmware_datacenter: 'EDGE Datacenter'
+vmware_hostname: rhel-edge-1
+vmware_template_name: rhel-edge-template
+vmware_datastore: Datacenter1
+vmware_folder: 'edge-deployments'
+vmware_disk_size: 20
+vmware_ram_mb: 4092
+vm_cpu_count: 2
+vm_num_cpu_cores_per_socket: 1
+vmware_network: "VM Network"
+vmware_state: poweredon
+vmware_inventory_group: newlyprovisionedvm
+iso_path_loc: "ISOs/rhel-edge-iso.iso"
+iso_src: "/tmp/rhel-edge-iso.iso"
+vm_guest_id: ''
