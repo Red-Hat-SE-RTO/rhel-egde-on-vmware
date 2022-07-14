@@ -10,7 +10,6 @@ vmware_hostname: rhel-edge-1
 vmware_template_name: rhel-edge-template
 vcenter_datastore: Datastore
 vmware_folder: 'edge-deployments'
-vmware_disk_size: 20
 vmware_ram_mb: 4092
 vm_cpu_count: 2
 vm_num_cpu_cores_per_socket: 1
@@ -21,3 +20,10 @@ iso_path_loc: "ISOs/rhel-edge-iso.iso"
 iso_src: "/tmp/rhel-edge-iso.iso"
 vm_guest_id: ''
 vcenter_hardware_version: 15
+vmware_disks:
+  - size_gb: 30
+    type: thin
+    state: present
+    controller_number: 0
+    unit_number: 0
+    datastore: "{{ vcenter_datastore }}"
