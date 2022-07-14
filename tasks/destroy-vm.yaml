@@ -46,7 +46,7 @@
     username: '{{ vcenter_username }}'
     password: '{{ vcenter_password }}'
     validate_certs: '{{ vcenter_verify_ssl }}'
-    datacenter_name: "{{ vmware_datacenter }}"
+    datacenter_name: "{{ vcenter_datacenter }}"
     folder_name: "{{ cluster_name }}"
     folder_type: vm
     state: absent

@@ -4,7 +4,7 @@ vcenter_hostname: "vsphere@example.com"
 vcenter_username: "administrator@vsphere.local"
 vcenter_password: "P@$$w0rD"
 vcenter_verify_ssl: false 
-vmware_datacenter: 'EDGE Datacenter'
+vcenter_datacenter: 'EDGE Datacenter'
 vmware_hostname: rhel-edge-1
 vmware_template_name: rhel-edge-template
 vmware_datastore: Datacenter1
