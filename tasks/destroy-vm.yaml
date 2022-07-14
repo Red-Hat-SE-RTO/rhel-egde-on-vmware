@@ -43,7 +43,7 @@
     username: '{{ vcenter_username }}'
     password: '{{ vcenter_password }}'
     validate_certs: '{{ vcenter_verify_ssl }}'
-    datacenter: "{{ vmware_datacenter }}"
+    datacenter: "{{ vcenter_datacenter }}"
     datastore: "{{ {{ vmware_datastore }} }}"
     path: "{{ iso_path_loc }}"
     state: file
@@ -60,7 +60,7 @@
     username: '{{ vcenter_username }}'
     password: '{{ vcenter_password }}'
     validate_certs: '{{ vcenter_verify_ssl }}'
-    datacenter: "{{ vmware_datacenter }}"
+    datacenter: "{{ vcenter_datacenter }}"
     datastore: "{{ {{ vmware_datastore }} }}"
     path: "{{ iso_path_loc }}"
     state: absent
