@@ -1,5 +1,5 @@
 ---
-- name: Create VM - {{ vmware_hostname }}
+- name: "Create VM - {{ vmware_hostname }}"
   community.vmware.vmware_guest:
     hostname: '{{  vcenter_hostname }}'
     username: '{{  vcenter_username }}'
