@@ -16,7 +16,7 @@
     hardware:
       memory_mb: "{{ vmware_ram_mb }}"
       num_cpu_cores_per_socket : "{{ vm_num_cpu_cores_per_socket }}"
-      num_cpus : "{{ vm_num_cpus }}"
+      num_cpus : "{{ vm_cpu_count }}"
       hotadd_cpu: yes
       hotadd_memory: yes
       version: "{{ vcenter_hardware_version | int }}"
