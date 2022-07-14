@@ -1,6 +1,39 @@
 ---
 
 #===========================================================================
+# Delete VM
+#===========================================================================
+- name: Power off VM - {{ vmware_hostname }}
+  community.vmware.vmware_guest:
+    hostname: '{{ vcenter_hostname }}'
+    username: '{{ vcenter_username }}'
+    password: '{{ vcenter_password }}'
+    validate_certs: '{{ vcenter_verify_ssl }}'
+    datacenter: "{{  vcenter_datacenter }}"
+    datastore: "{{  vcenter_datastore }}"
+    cluster: "{{  vcenter_cluster }}"
+    name: "{{ vcenter_cluster }}-{{ vmware_hostname }}"
+    folder: "{{ vmware_folder }}"
+    state: powered-off
+  tags:
+    - vmware_destroy_vm
+
+- name: Destroy VM - {{ vmware_hostname }}
+  community.vmware.vmware_guest:
+    hostname: '{{ vcenter_hostname }}'
+    username: '{{ vcenter_username }}'
+    password: '{{ vcenter_password }}'
+    validate_certs: '{{ vcenter_verify_ssl }}'
+    datacenter: "{{  vcenter_datacenter }}"
+    datastore: "{{  vcenter_datastore }}"
+    cluster: "{{  vcenter_cluster }}"
+    name: "{{ vcenter_cluster }}-{{ vmware_hostname }}"
+    folder: "{{ vmware_folder }}"
+    state: absent
+  tags:
+    - vmware_destroy_vm
+
+#===========================================================================
 # Delete ISO
 #===========================================================================
 
@@ -47,7 +80,7 @@
     password: '{{ vcenter_password }}'
     validate_certs: '{{ vcenter_verify_ssl }}'
     datacenter_name: "{{ vcenter_datacenter }}"
-    folder_name: "{{ cluster_name }}"
+    folder_name: "{{ vmware_folder }}"
     folder_type: vm
     state: absent
   ignore_errors: true
