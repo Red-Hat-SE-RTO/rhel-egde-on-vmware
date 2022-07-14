@@ -13,17 +13,11 @@ vmware_folder: 'edge-deployments'
 vmware_ram_mb: 4092
 vm_cpu_count: 2
 vm_num_cpu_cores_per_socket: 1
-vmware_network: "VM Network"
+vcenter_network: "VM Network"
 vmware_state: poweredon
 vmware_inventory_group: newlyprovisionedvm
 iso_path_loc: "ISOs/rhel-edge-iso.iso"
 iso_src: "/tmp/rhel-edge-iso.iso"
 vm_guest_id: ''
 vcenter_hardware_version: 15
-vmware_disks:
-  - size_gb: 30
-    type: thin
-    state: present
-    controller_number: 0
-    unit_number: 0
-    datastore: "{{ vcenter_datastore }}"
+disk_size: 30

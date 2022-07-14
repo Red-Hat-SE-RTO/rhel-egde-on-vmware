@@ -12,7 +12,13 @@
     folder: "{{ vmware_folder }}"
     guest_id: rhel8_64Guest	
     state: present
-    disk: "{{ vmware_disks }}"
+    disk:
+    - size_gb: "{{ disk_size }}"
+      type: thin
+      state: present
+      controller_number: 0
+      unit_number: 0
+      datastore: "{{ vcenter_datastore }}"
     hardware:
       memory_mb: "{{ vmware_ram_mb }}"
       num_cpu_cores_per_socket : "{{ vm_num_cpu_cores_per_socket }}"
