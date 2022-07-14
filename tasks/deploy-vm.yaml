@@ -15,9 +15,6 @@
     disk:
     - size_gb: "{{ disk_size }}"
       type: thin
-      state: present
-      controller_number: 0
-      unit_number: 0
       datastore: "{{ vcenter_datastore }}"
     hardware:
       memory_mb: "{{ vmware_ram_mb }}"
