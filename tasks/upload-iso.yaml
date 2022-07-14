@@ -44,7 +44,7 @@
     datastore: "{{  vcenter_datastore }}"
     path: "{{ iso_path_loc }}"
     state: file
-  ignore_errors: true
+  ignore_errors: false
   register: vmware_check_for_iso
   tags:
     - vmware_check_for_iso
@@ -63,4 +63,3 @@
   ignore_errors: true
   tags:
   - vmware_upload_iso
-  - vmware_check_for_iso
