@@ -7,7 +7,7 @@ vcenter_verify_ssl: false
 vcenter_datacenter: 'EDGE Datacenter'
 vmware_hostname: rhel-edge-1
 vmware_template_name: rhel-edge-template
-vmware_datastore: Datacenter1
+vcenter_datastore: Datacenter1
 vmware_folder: 'edge-deployments'
 vmware_disk_size: 20
 vmware_ram_mb: 4092
