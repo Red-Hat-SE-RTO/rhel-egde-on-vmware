@@ -51,7 +51,7 @@ Create foler and upload iso the vSphere
 ```
 
 
-Create foler and upload iso the vSphere
+Create folder and upload iso the vSphere
 ```
  ansible-playbook -i inventory myplaybook.yml --extra-vars "@your_vars.yml" -t vmware_deploy_vms -vv
 ```
