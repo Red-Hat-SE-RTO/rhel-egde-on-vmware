@@ -24,7 +24,7 @@
       hotadd_memory: yes
       version: "{{ vcenter_hardware_version | int }}"
       nested_virt: "{{ vsphere_nested_virt | default(False) }}"
-      cdrom:
+    cdrom:
       - controller_number: 0
         unit_number: 0
         state: present
