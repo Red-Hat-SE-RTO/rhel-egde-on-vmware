@@ -45,17 +45,22 @@ To Deploy
 ansible-playbook -i inventory myplaybook.yml --extra-vars "@your_vars.yml"
 ```
 
-Create foler and upload iso the vSphere
+Create folder and upload iso the vSphere
 ```
  ansible-playbook -i inventory myplaybook.yml --extra-vars "@your_vars.yml" -t vmware_create_folder,vmware_check_for_iso,vmware_upload_iso -vv
 ```
 
 
-Create foler and upload iso the vSphere
+Deply Vms on VMware
 ```
  ansible-playbook -i inventory myplaybook.yml --extra-vars "@your_vars.yml" -t vmware_deploy_vms -vv
 ```
 
+
+Delete foler and upload iso and mv in  vSphere
+```
+ ansible-playbook -i inventory myplaybook.yml --extra-vars "@your_vars.yml" -t vmware_destroy_vm -vv
+```
 License
 -------
 
