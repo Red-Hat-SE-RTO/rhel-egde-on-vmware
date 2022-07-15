@@ -32,7 +32,12 @@
         iso_path: "[{{ vcenter_datastore }}] {{ iso_path_loc }}"
     networks:
     - name: "{{ vcenter_network }}"
-      device_type: vmxnet3
+      ip: 192.168.1.150
+      netmask: 255.255.255.0
+      gateway: 192.168.1.1
+      mac: "{{ mac_adddress }}"
+      dns_servers:
+      - 192.168.1.239
   tags:
     - vmware_deploy_vms
 

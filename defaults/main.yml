@@ -14,6 +14,7 @@ vmware_ram_mb: 4092
 vm_cpu_count: 2
 vm_num_cpu_cores_per_socket: 1
 vcenter_network: "VM Network"
+mac_adddress: "aa:bb:dd:aa:00:14"
 vmware_state: poweredon
 vmware_inventory_group: newlyprovisionedvm
 iso_path_loc: "ISOs/rhel-edge-iso.iso"
