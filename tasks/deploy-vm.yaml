@@ -1,5 +1,5 @@
 ---
-- name: Create VM - {{ vmware_hostname }}
+- name: "Create VM - {{ vmware_hostname }}"
   community.vmware.vmware_guest:
     hostname: '{{  vcenter_hostname }}'
     username: '{{  vcenter_username }}'
@@ -8,22 +8,32 @@
     datacenter: "{{  vcenter_datacenter }}"
     datastore: "{{  vcenter_datastore }}"
     cluster: "{{  vcenter_cluster }}"
-    name: "{{ cluster_name }}-{{ vmware_hostname }}"
+    name: "{{ vcenter_cluster }}-{{ vmware_hostname }}"
     folder: "{{ vmware_folder }}"
-    guest_id: coreos64Guest
+    guest_id: rhel8_64Guest	
     state: present
-    disk: "{{ vmware_disk_size }}"
+    disk:
+    - size_gb: "{{ disk_size }}"
+      type: thin
+      datastore: "{{ vcenter_datastore }}"
     hardware:
       memory_mb: "{{ vmware_ram_mb }}"
       num_cpu_cores_per_socket : "{{ vm_num_cpu_cores_per_socket }}"
-      num_cpus : "{{ vm_num_cpus }}"
+      num_cpus : "{{ vm_cpu_count }}"
       hotadd_cpu: yes
       hotadd_memory: yes
       version: "{{ vcenter_hardware_version | int }}"
       nested_virt: "{{ vsphere_nested_virt | default(False) }}"
-    cdrom: "{{ iso_path_loc }}"
-    networks: "{{ networks }}"
-    tags:
+      cdrom:
+      - controller_number: 0
+        unit_number: 0
+        state: present
+        type: iso
+        iso_path: "[{{ vcenter_datastore }}] {{ iso_path_loc }}"
+    networks:
+    - name: "{{ vcenter_network }}"
+      device_type: vmxnet3
+  tags:
     - vmware_deploy_vms
 
 - name: Power On VM - {{ vmware_hostname }}
@@ -38,6 +48,7 @@
     name: "{{ vcenter_cluster }}-{{ vmware_hostname }}"
     folder: "{{ vmware_folder }}"
     state: powered-on
+    guest_id: rhel8_64Guest	
   tags:
     - vmware_deploy_vms
 
