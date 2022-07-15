@@ -19,6 +19,7 @@ ip_address: 192.168.1.15
 gateway: 192.168.1.1
 net_mask: 255.255.255.0
 dns_server: 1.1.1.1
+use_dhcp: false
 vmware_state: poweredon
 vmware_inventory_group: newlyprovisionedvm
 iso_path_loc: "ISOs/rhel-edge-iso.iso"

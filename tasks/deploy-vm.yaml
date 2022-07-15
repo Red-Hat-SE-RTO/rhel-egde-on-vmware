@@ -1,5 +1,5 @@
 ---
-- name: "Create VM - {{ vmware_hostname }}"
+- name: "Create VM - {{ vmware_hostname }}  with static IP"
   community.vmware.vmware_guest:
     hostname: '{{  vcenter_hostname }}'
     username: '{{  vcenter_username }}'
@@ -40,6 +40,44 @@
       - "{{ dns_server }}"
   tags:
     - vmware_deploy_vms
+  when: use_dhcp == false 
+
+- name: "Create VM - {{ vmware_hostname }} with DHCP"
+  community.vmware.vmware_guest:
+    hostname: '{{  vcenter_hostname }}'
+    username: '{{  vcenter_username }}'
+    password: '{{  vcenter_password }}'
+    validate_certs: '{{  vcenter_verify_ssl }}'
+    datacenter: "{{  vcenter_datacenter }}"
+    datastore: "{{  vcenter_datastore }}"
+    cluster: "{{  vcenter_cluster }}"
+    name: "{{ vcenter_cluster }}-{{ vmware_hostname }}"
+    folder: "{{ vmware_folder }}"
+    guest_id: rhel8_64Guest	
+    state: present
+    disk:
+    - size_gb: "{{ disk_size }}"
+      type: thin
+      datastore: "{{ vcenter_datastore }}"
+    hardware:
+      memory_mb: "{{ vmware_ram_mb }}"
+      num_cpu_cores_per_socket : "{{ vm_num_cpu_cores_per_socket }}"
+      num_cpus : "{{ vm_cpu_count }}"
+      hotadd_cpu: yes
+      hotadd_memory: yes
+      version: "{{ vcenter_hardware_version | int }}"
+      nested_virt: "{{ vsphere_nested_virt | default(False) }}"
+    cdrom:
+      - controller_number: 0
+        unit_number: 0
+        state: present
+        type: iso
+        iso_path: "[{{ vcenter_datastore }}] {{ iso_path_loc }}"
+    networks:
+    - name: "{{ vcenter_network }}"
+  tags:
+    - vmware_deploy_vms
+  when: use_dhcp == true 
 
 - name: Power On VM - {{ vmware_hostname }}
   community.vmware.vmware_guest:
