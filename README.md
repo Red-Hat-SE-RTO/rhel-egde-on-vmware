@@ -61,6 +61,11 @@ Delete foler and upload iso and mv in  vSphere
 ```
  ansible-playbook -i inventory myplaybook.yml --extra-vars "@your_vars.yml" -t vmware_destroy_vm -vv
 ```
+
+Links
+-----
+[mac Generator for  vmware](https://gist.github.com/tosin2013/eb9e67ab88da09b9597f1b7760f199c9)
+
 License
 -------
 
